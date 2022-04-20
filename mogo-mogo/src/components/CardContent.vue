@@ -27,7 +27,7 @@ export default {
   object-fit: cover;
 }
 .text-box {
-  height: 376px;
+  height: 400px;
 }
 /*----  Main Style  ----*/
 #cards_landscape_wrap-2 {
