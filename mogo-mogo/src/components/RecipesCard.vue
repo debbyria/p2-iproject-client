@@ -16,6 +16,11 @@ export default {
             <h6>{{ recipe.title }}</h6>
             <p>views : {{ recipe.views }}</p>
           </div>
+          <div>
+            <button>
+              <i class="fa-solid fa-heart"></i> Add to My Favorite
+            </button>
+          </div>
         </div>
       </div>
     </a>
@@ -23,11 +28,29 @@ export default {
 </template>
 
 <style scoped>
+button {
+  border-radius: 20px;
+  border: 1px solid #5b7db1;
+  background-color: #b4e197;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+button:hover {
+  background-color: #4e944f;
+}
 .img-prod {
   object-fit: cover;
 }
 .text-box {
-  height: 376px;
+  height: 400px;
+}
+.text-container {
+  height: 130px;
 }
 /*----  Main Style  ----*/
 #cards_landscape_wrap-2 {

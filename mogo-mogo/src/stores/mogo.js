@@ -6,16 +6,21 @@ export const useMogoStore = defineStore({
   state: () => ({
     baseUrl: 'http://localhost:3000',
     restaurants: [],
-    recipes: []
+    recipes: [],
+    searchData: {
+      keyword: "",
+      location: "",
+    }
   }),
   getters: {},
   actions: {
     fetchRestaurantsAction() {
-      return axios.get(`${this.baseUrl}/restaurants/list`)
+      return axios.get(`${this.baseUrl}/restaurants/list?location=${this.searchData.location}`)
     },
     fetchRecipesAction() {
-      return axios.get(`${this.baseUrl}/recipes`)
+      return axios.get(`${this.baseUrl}/recipes?keyword=${this.searchData.keyword}`)
     }
+
   },
 
 });

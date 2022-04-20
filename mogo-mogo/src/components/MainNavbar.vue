@@ -3,11 +3,13 @@ export default {};
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"
-        ><img width="200px" src="../assets/logo-removebg.png"
-      /></a>
+      <div class="brand-img">
+        <a class="navbar-brand" href="#"
+          ><img width="150px" src="../assets/logo-removebg.png"
+        /></a>
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -21,14 +23,14 @@ export default {};
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#"
-            >Find Restaurants</a
+          <RouterLink to="/" class="nav-link" href="#"
+            ><i class="fa-solid fa-utensils"></i> List Restaurants</RouterLink
           >
           <RouterLink to="/recipes" class="nav-link" href="#"
-            >Find Recipes</RouterLink
+            ><i class="fa-solid fa-book"></i> List Recipes</RouterLink
           >
-          <a class="nav-link" href="#"
-            ><i class="fa-solid fa-heart"></i> My Favorites</a
+          <RouterLink to="/favorites" class="nav-link" href="#"
+            ><i class="fa-solid fa-heart"></i> My Favorites</RouterLink
           >
         </div>
       </div>
@@ -37,10 +39,15 @@ export default {};
 </template>
 
 <style scoped>
-.container-fluid {
-  background-color: #faf5e4;
+.brand-img {
+  width: 170px;
+}
+.navbar {
+  background-color: #f6e7d8;
+  height: 100px;
+  width: 100%;
 }
 .nav-link {
-  font-size: 25px;
+  font-size: 20px;
 }
 </style>
