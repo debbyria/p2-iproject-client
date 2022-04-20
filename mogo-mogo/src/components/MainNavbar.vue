@@ -21,15 +21,14 @@ export default {};
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Features</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a
-            class="nav-link disabled"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-            >Disabled</a
+          <a class="nav-link active" aria-current="page" href="#"
+            >Find Restaurants</a
+          >
+          <RouterLink to="/recipes" class="nav-link" href="#"
+            >Find Recipes</RouterLink
+          >
+          <a class="nav-link" href="#"
+            ><i class="fa-solid fa-heart"></i> My Favorites</a
           >
         </div>
       </div>
@@ -40,5 +39,8 @@ export default {};
 <style scoped>
 .container-fluid {
   background-color: #faf5e4;
+}
+.nav-link {
+  font-size: 25px;
 }
 </style>
