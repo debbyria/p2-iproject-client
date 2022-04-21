@@ -24,7 +24,9 @@ export default {
           text: "You are registered, please sign in now",
         });
       } catch (err) {
-        console.log(err.response);
+        this.$swal({
+          icon: "error",
+        });
       }
     },
   },

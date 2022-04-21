@@ -1,5 +1,18 @@
 <script>
-export default {};
+import { mapActions, mapWritableState } from "pinia";
+import { useMogoStore } from "../stores/mogo";
+
+export default {
+  computed: {
+    ...mapWritableState(useMogoStore, ["isLoggedIn"]),
+  },
+  methods: {
+    logoutButtonHandler() {
+      localStorage.clear;
+      this.isLoggedIn = false;
+    },
+  },
+};
 </script>
 
 <template>
@@ -33,6 +46,23 @@ export default {};
             ><i class="fa-solid fa-heart"></i> My Favorites</RouterLink
           >
         </div>
+        <div class="menu ms-auto">
+          <RouterLink to="/login" class="navbar-link" v-if="!isLoggedIn"
+            >Sign In</RouterLink
+          >
+          <RouterLink class="navbar-link" to="/register" v-if="!isLoggedIn"
+            >Sign Up</RouterLink
+          >
+          <a
+            v-if="isLoggedIn"
+            class="navbar-link logout-link"
+            href=""
+            aria-disabled="true"
+            @click.prevent="logoutButtonHandler"
+            ><i class="fa-solid fa-right-from-bracket" style="color: red"></i>
+            Logout</a
+          >
+        </div>
       </div>
     </div>
   </nav>
@@ -49,5 +79,12 @@ export default {};
 }
 .nav-link {
   font-size: 20px;
+}
+
+.navbar-link {
+  font-size: 20px;
+  font-weight: 550;
+  letter-spacing: 1px;
+  margin: 10px;
 }
 </style>
