@@ -5,16 +5,44 @@ import { useMogoStore } from "../stores/mogo.js";
 
 export default {
   data() {
-    return {};
+    return {
+      currentPage: 1,
+      currentDataRestaurant: [],
+    };
   },
   components: { CardContent },
+  computed: {
+    ...mapWritableState(useMogoStore, [
+      "restaurants",
+      "searchData",
+      "restaurantPage",
+    ]),
+  },
   methods: {
     ...mapActions(useMogoStore, ["fetchRestaurantsAction"]),
 
     async getRestaurants() {
       try {
+        this.currentDataRestaurant = [];
+        this.restaurantPage = [];
         let response = await this.fetchRestaurantsAction();
         this.restaurants = response.data.results;
+
+        for (
+          let i = (this.currentPage - 1) * 9;
+          i < this.currentPage * 9;
+          i++
+        ) {
+          if (!this.restaurants[i]) {
+            break;
+          } else {
+            this.currentDataRestaurant.push(this.restaurants[i]);
+          }
+        }
+
+        for (let i = 1; i <= response.data.totalPage; i++) {
+          this.restaurantPage.push({ index: i });
+        }
       } catch (err) {
         this.$swal({
           icon: "error",
@@ -24,6 +52,7 @@ export default {
     },
     async searchButtonHandler() {
       try {
+        this.currentPage = 1;
         this.getRestaurants();
       } catch (err) {
         this.$swal({
@@ -32,9 +61,14 @@ export default {
         });
       }
     },
-  },
-  computed: {
-    ...mapWritableState(useMogoStore, ["restaurants", "searchData"]),
+    async changePage(index) {
+      try {
+        this.currentPage = index;
+        this.getRestaurants();
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   created() {
     this.getRestaurants();
@@ -64,12 +98,24 @@ export default {
       </div>
       <div class="row">
         <CardContent
-          v-for="restaurant in restaurants"
+          v-for="restaurant in currentDataRestaurant"
           :key="restaurant.id"
           :restaurant="restaurant"
         />
       </div>
     </div>
+    <nav class="pagination-nav" aria-label="Page navigation example">
+      <ul class="pagination">
+        <li v-for="page in restaurantPage" class="page-item">
+          <a
+            @click.prevent="changePage(page.index)"
+            class="page-link"
+            href="#"
+            >{{ page.index }}</a
+          >
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -106,5 +152,8 @@ button {
 }
 button:hover {
   background-color: #4e944f;
+}
+.pagination-nav {
+  margin: 20px 72px;
 }
 </style>
