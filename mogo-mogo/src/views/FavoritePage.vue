@@ -3,57 +3,67 @@ import { mapActions, mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
 
 export default {
-  props: ["recipe"],
   computed: {
     ...mapWritableState(useMogoStore, ["userFavorites"]),
   },
   methods: {
-    ...mapActions(useMogoStore, ["addFavoriteActions"]),
+    ...mapActions(useMogoStore, ["fetchFavoritesAction"]),
 
-    async addToFavorite(payload) {
+    async getFavorites() {
       try {
-        let response = await this.addFavoriteActions(payload);
+        let response = await this.fetchFavoritesAction();
+        this;
 
-        this.$swal({
-          icon: "success",
-          text: "succeed add recipe to your favorites",
-        });
+        this.userFavorites = response.data;
       } catch (err) {
         this.$swal({
           icon: "error",
-          text: "Failed add recipe to your favorites",
+          text: "Data Not Found",
         });
       }
     },
+  },
+  created() {
+    this.getFavorites();
   },
 };
 </script>
 
 <template>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="">
-      <div class="card-flyer">
-        <div class="text-box">
-          <div class="image-box">
-            <img class="img-prod" :src="recipe.thumbnail" alt="" />
-          </div>
-          <div class="text-container">
-            <h6>{{ recipe.title }}</h6>
-            <p>views : {{ recipe.views }}</p>
-          </div>
-          <div>
-            <button @click.prevent="addToFavorite(recipe)">
-              <i class="fa-solid fa-heart"></i> Add to My Favorite
-            </button>
-            <button class="mt-4 btn-watch">
-              <a :href="recipe.youtubeUrl" target="_blank"
-                ><i class="fa-solid fa-circle-play"></i> Click here to watch</a
-              >
-            </button>
-          </div>
+  <div id="cards_landscape_wrap-2">
+    <div class="container">
+      <div>
+        <h2>Favorites</h2>
+      </div>
+      <div class="row">
+        <div
+          v-for="favorite in userFavorites"
+          :key="id"
+          class="col-xs-12 col-sm-6 col-md-4 col-lg-4"
+        >
+          <a href="">
+            <div class="card-flyer">
+              <div class="text-box">
+                <div class="image-box">
+                  <img class="img-prod" :src="favorite.imageUrl" alt="" />
+                </div>
+                <div class="text-container">
+                  <h6>{{ favorite.name }}</h6>
+                </div>
+                <div>
+                  <button class="mt-4 btn-watch">
+                    <a :href="favorite.youtubeUrl" target="_blank"
+                      ><i class="fa-solid fa-circle-play"></i> Click here to
+                      watch</a
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -86,10 +96,10 @@ button:hover {
   object-fit: cover;
 }
 .text-box {
-  height: 480px;
+  height: 400px;
 }
 .text-container {
-  height: 130px;
+  height: 100px;
 }
 /*----  Main Style  ----*/
 #cards_landscape_wrap-2 {

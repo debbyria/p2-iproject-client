@@ -1,10 +1,13 @@
 <script>
-import RecipesCard from "../components/RecipesCard.vue";
 import { mapActions, mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
+import RecipesCard from "../components/RecipesCard.vue";
 
 export default {
   components: { RecipesCard },
+  computed: {
+    ...mapWritableState(useMogoStore, ["recipes", "searchData"]),
+  },
   methods: {
     ...mapActions(useMogoStore, ["fetchRecipesAction"]),
 
@@ -31,9 +34,7 @@ export default {
       }
     },
   },
-  computed: {
-    ...mapWritableState(useMogoStore, ["recipes", "searchData"]),
-  },
+
   created() {
     this.getRecipes();
   },
