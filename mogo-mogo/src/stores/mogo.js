@@ -4,7 +4,7 @@ import axios from 'axios'
 export const useMogoStore = defineStore({
   id: "mogo",
   state: () => ({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://mogo-mogo-debby.herokuapp.com',
     restaurants: [],
     recipes: [],
     searchData: {
