@@ -3,39 +3,101 @@ import { mapActions, mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
 
 export default {
-  props: ["restaurant"],
+  data() {
+    return {
+      detailRestaurant: {},
+    };
+  },
   methods: {
-    goToDetail(id) {
-      this.$router.push(`/restaurant/${id}`);
+    ...mapActions(useMogoStore, ["fetchDetailRestaurant"]),
+    async getDetails(id) {
+      try {
+        let response = await this.fetchDetailRestaurant(id);
+        this.detailRestaurant = response.data;
+      } catch (err) {
+        this.$swal({
+          icons: "error",
+        });
+      }
     },
+  },
+  created() {
+    this.getDetails(this.$route.params.fsqId);
   },
 };
 </script>
 
 <template>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <a href="" @click.prevent="goToDetail(restaurant.fsq_id)">
-      <div class="card-flyer">
-        <div class="text-box">
-          <div class="image-box">
-            <img class="img-prod" :src="restaurant.imageUrl" alt="" />
-          </div>
-          <div class="text-container">
-            <h6>{{ restaurant.name }}</h6>
-            <p>{{ restaurant.location }}</p>
+  <div
+    id="cards_landscape_wrap-2"
+    class="col-xs-4 col-sm-6 col-md-6 col-lg-6 mx-auto"
+  >
+    <div class="container">
+      <div class="row">
+        <div>
+          <div class="card-flyer">
+            <div class="text-box">
+              <div class="image-box">
+                <img
+                  width="200px"
+                  class="img-prod"
+                  :src="detailRestaurant.imageUrl"
+                  alt=""
+                />
+              </div>
+              <div class="text-container">
+                <h6>{{ detailRestaurant.name }}</h6>
+                <p>{{ detailRestaurant.address }}</p>
+              </div>
+              <div>
+                <div class="mapouter">
+                  <div class="gmap_canvas">
+                    <iframe
+                      width="590"
+                      height="400"
+                      id="gmap_canvas"
+                      :src="detailRestaurant.locationMap"
+                      frameborder="0"
+                      scrolling="no"
+                      marginheight="0"
+                      marginwidth="0"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </a>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.card-cont {
+  height: 300px;
+}
+.mapouter {
+  position: relative;
+  text-align: right;
+  height: 500px;
+  width: 600px;
+}
+.gmap_canvas {
+  overflow: hidden;
+  background: none !important;
+  height: 500px;
+  width: 600px;
+}
+
+.detail-card {
+  margin-left: 50%;
+}
 .img-prod {
   object-fit: cover;
 }
 .text-box {
-  height: 400px;
+  height: 800px;
 }
 /*----  Main Style  ----*/
 #cards_landscape_wrap-2 {
@@ -60,10 +122,6 @@ export default {
   border-radius: 5px;
 }
 #cards_landscape_wrap-2 .card-flyer .image-box img {
-  /* -webkit-transition: all 0.9s ease;
-  -moz-transition: all 0.9s ease;
-  -o-transition: all 0.9s ease;
-  -ms-transition: all 0.9s ease; */
   width: 100%;
   height: 200px;
 }

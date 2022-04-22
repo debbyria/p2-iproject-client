@@ -4,6 +4,7 @@ import RecipesPage from "../views/RecipesPage.vue"
 import LoginPage from "../views/LoginPage.vue"
 import RegisterPage from "../views/RegisterPage.vue"
 import FavoritePage from "../views/FavoritePage.vue"
+import DetailRestaurantPage from "../views/DetailRestaurantPage.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/favorites",
       name: "favorites",
       component: FavoritePage
+    },
+    {
+      path: "/restaurant/:fsqId",
+      name: "detail",
+      component: DetailRestaurantPage
     }
   ],
 });

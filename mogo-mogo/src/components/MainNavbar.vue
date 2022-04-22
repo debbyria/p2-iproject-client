@@ -46,11 +46,11 @@ export default {
             ><i class="fa-solid fa-heart"></i> My Favorites</RouterLink
           >
         </div>
-        <div class="menu ms-auto">
-          <RouterLink to="/login" class="navbar-link" v-if="!isLoggedIn"
+        <div class="navbar-nav menu ms-auto">
+          <RouterLink to="/login" href="" class="nav-link" v-if="!isLoggedIn"
             >Sign In</RouterLink
           >
-          <RouterLink class="navbar-link" to="/register" v-if="!isLoggedIn"
+          <RouterLink class="nav-link" href="" to="/register" v-if="!isLoggedIn"
             >Sign Up</RouterLink
           >
           <a
@@ -79,12 +79,5 @@ export default {
 }
 .nav-link {
   font-size: 20px;
-}
-
-.navbar-link {
-  font-size: 20px;
-  font-weight: 550;
-  letter-spacing: 1px;
-  margin: 10px;
 }
 </style>
