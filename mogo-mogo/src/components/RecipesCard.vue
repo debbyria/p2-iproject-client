@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <script>
 import { mapActions, mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
@@ -28,7 +29,7 @@ export default {
   },
 };
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
     <a href="">
@@ -56,7 +57,7 @@ export default {
     </a>
   </div>
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <style scoped>
 a {
   color: #000000;

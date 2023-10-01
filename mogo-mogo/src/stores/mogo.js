@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import axios from 'axios'
+import axios from "axios";
 
 export const useMogoStore = defineStore({
   id: "mogo",
   state: () => ({
-    baseUrl: 'https://mogo-mogo-debby.herokuapp.com',
+    baseUrl: "http://localhost:3000",
     restaurants: [],
     recipes: [],
     searchData: {
@@ -20,23 +20,27 @@ export const useMogoStore = defineStore({
   getters: {},
   actions: {
     fetchRestaurantsAction() {
-      return axios.get(`${this.baseUrl}/restaurants/list?location=${this.searchData.location}`)
+      return axios.get(
+        `${this.baseUrl}/restaurants/list?location=${this.searchData.location}`
+      );
     },
     fetchRecipesAction() {
-      return axios.get(`${this.baseUrl}/recipes?keyword=${this.searchData.keyword}`)
+      return axios.get(
+        `${this.baseUrl}/recipes?keyword=${this.searchData.keyword}`
+      );
     },
     loginAction(payload) {
       return axios.post(`${this.baseUrl}/users/login`, {
         email: payload.email,
-        password: payload.password
-      })
+        password: payload.password,
+      });
     },
     registerAction(payload) {
       return axios.post(`${this.baseUrl}/users/register`, {
         username: payload.username,
         email: payload.email,
-        password: payload.password
-      })
+        password: payload.password,
+      });
     },
     addFavoriteActions(payload) {
       return axios.post(
@@ -51,19 +55,17 @@ export const useMogoStore = defineStore({
             access_token: localStorage.access_token,
           },
         }
-      )
+      );
     },
     fetchFavoritesAction() {
       return axios.get(`${this.baseUrl}/recipes/favorite`, {
         headers: {
-          access_token: localStorage.access_token
-        }
-      })
+          access_token: localStorage.access_token,
+        },
+      });
     },
     fetchDetailRestaurant(params) {
-      return axios.get(`${this.baseUrl}/restaurants/${params}`)
-    }
-
+      return axios.get(`${this.baseUrl}/restaurants/${params}`);
+    },
   },
-
 });

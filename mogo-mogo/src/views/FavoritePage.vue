@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <script>
 import { mapActions, mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
@@ -28,6 +29,7 @@ export default {
   },
 };
 </script>
+<!-- eslint-disable prettier/prettier -->
 
 <template>
   <div id="cards_landscape_wrap-2">
@@ -66,7 +68,7 @@ export default {
     </div>
   </div>
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <style scoped>
 a {
   color: #000000;

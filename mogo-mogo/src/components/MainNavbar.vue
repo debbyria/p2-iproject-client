@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapWritableState } from "pinia";
+import { mapWritableState } from "pinia";
 import { useMogoStore } from "../stores/mogo";
 
 export default {
@@ -14,7 +14,6 @@ export default {
   },
 };
 </script>
-
 <template>
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container-fluid">
@@ -67,7 +66,6 @@ export default {
     </div>
   </nav>
 </template>
-
 <style scoped>
 .brand-img {
   width: 170px;

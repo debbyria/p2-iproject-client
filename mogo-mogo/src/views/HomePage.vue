@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <script>
 import CardContent from "../components/CardContent.vue";
 import { mapActions, mapWritableState } from "pinia";
@@ -75,7 +76,7 @@ export default {
   },
 };
 </script>
-
+<!-- eslint-disable prettier/prettier -->
 <template>
   <!-- Topic Cards -->
   <div id="cards_landscape_wrap-2">
@@ -118,7 +119,7 @@ export default {
     </nav>
   </div>
 </template>
-
+<!-- eslint-disable prettier/prettier -->
 <style scoped>
 .search-div {
   background-color: #fff;
